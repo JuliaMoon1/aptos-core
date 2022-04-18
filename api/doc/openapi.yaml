@@ -998,6 +998,7 @@ components:
         - success
         - vm_status
         - accumulator_root_hash
+        - changes
       properties:
         version:
           $ref: '#/components/schemas/Uint64'
@@ -1020,6 +1021,10 @@ components:
             Human readable transaction execution result message from Aptos VM.
         accumulator_root_hash:
           $ref: '#/components/schemas/HexEncodedBytes'
+        changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/WriteSetChange'
     UserTransaction:
       title: User Transaction
       type: object
@@ -1242,12 +1247,15 @@ components:
       type: object
       required:
         - type
+        - state_key_hash
         - address
         - module
       properties:
         type:
           type: string
           example: "delete_module"
+        state_key_hash:
+          $ref: '#/components/schemas/HexEncodedBytes'
         address:
           $ref: '#/components/schemas/Address'
         module:
@@ -1258,12 +1266,15 @@ components:
       description: Delete account resource change.
       required:
         - type
+        - state_key_hash
         - address
         - resource
       properties:
         type:
           type: string
           example: "delete_resource"
+        state_key_hash:
+          $ref: '#/components/schemas/HexEncodedBytes'
         address:
           $ref: '#/components/schemas/Address'
         resource:
@@ -1274,12 +1285,15 @@ components:
       description: Write move module
       required:
         - type
+        - state_key_hash
         - address
         - data
       properties:
         type:
           type: string
           example: "write_module"
+        state_key_hash:
+          $ref: '#/components/schemas/HexEncodedBytes'
         address:
           $ref: '#/components/schemas/Address'
         data:
@@ -1290,12 +1304,15 @@ components:
       description: Write account resource
       required:
         - type
+        - state_key_hash
         - address
         - data
       properties:
         type:
           type: string
           example: "write_resource"
+        state_key_hash:
+          $ref: '#/components/schemas/HexEncodedBytes'
         address:
           $ref: '#/components/schemas/Address'
         data:
