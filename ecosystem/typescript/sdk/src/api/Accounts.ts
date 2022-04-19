@@ -36,10 +36,6 @@ export class Accounts<SecurityDataType = unknown> {
    * @name GetAccount
    * @summary Get account
    * @request GET:/accounts/{address}
-   * @response `200` `Account` Returns the latest account core data resource.
-   * @response `400` `(AptosError)`
-   * @response `404` `(AptosError)`
-   * @response `500` `(AptosError)`
    */
   getAccount = (address: Address, params: RequestParams = {}) =>
     this.http.request<Account, AptosError>({
@@ -55,10 +51,6 @@ export class Accounts<SecurityDataType = unknown> {
    * @name GetAccountResources
    * @summary Get account resources
    * @request GET:/accounts/{address}/resources
-   * @response `200` `(AccountResource)[]` This API returns account resources for a specific ledger version (AKA transaction version). If not present, the latest version is used. The Aptos nodes prune account state history, via a configurable time window (link). If the requested data has been pruned, the server responds with a 404
-   * @response `400` `(AptosError)`
-   * @response `404` `(AptosError)`
-   * @response `500` `(AptosError)`
    */
   getAccountResources = (address: Address, query?: { version?: LedgerVersion }, params: RequestParams = {}) =>
     this.http.request<AccountResource[], AptosError>({
@@ -75,10 +67,6 @@ export class Accounts<SecurityDataType = unknown> {
    * @name GetAccountModules
    * @summary Get account modules
    * @request GET:/accounts/{address}/modules
-   * @response `200` `(MoveModule)[]` This API returns account modules for a specific ledger version (AKA transaction version). If not present, the latest version is used. The Aptos nodes prune account state history, via a configurable time window (link). If the requested data has been pruned, the server responds with a 404
-   * @response `400` `(AptosError)`
-   * @response `404` `(AptosError)`
-   * @response `500` `(AptosError)`
    */
   getAccountModules = (address: Address, query?: { version?: LedgerVersion }, params: RequestParams = {}) =>
     this.http.request<MoveModule[], AptosError>({
@@ -95,9 +83,6 @@ export class Accounts<SecurityDataType = unknown> {
    * @name GetAccountTransactions
    * @summary Get account transactions
    * @request GET:/accounts/{address}/transactions
-   * @response `200` `(OnChainTransaction)[]` Returns on-chain transactions, paginated.
-   * @response `400` `(AptosError)`
-   * @response `500` `(AptosError)`
    */
   getAccountTransactions = (address: Address, query?: { start?: number; limit?: number }, params: RequestParams = {}) =>
     this.http.request<OnChainTransaction[], AptosError>({
@@ -114,10 +99,6 @@ export class Accounts<SecurityDataType = unknown> {
    * @name GetEventsByEventHandle
    * @summary Get events by event handle
    * @request GET:/accounts/{address}/events/{event_handle_struct}/{field_name}
-   * @response `200` `(Event)[]` Returns events
-   * @response `400` `(AptosError)`
-   * @response `404` `(AptosError)`
-   * @response `500` `(AptosError)`
    */
   getEventsByEventHandle = (
     address: Address,
